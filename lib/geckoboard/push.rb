@@ -30,8 +30,10 @@ module Geckoboard
     end
 
     # Value and previous value should be numeric values
-    def number_and_secondary_value(value, previous_value)
-      self.push(:item => [{:text => "", :value => value}, {:text => "", :value => previous_value}])
+    def number_and_secondary_value(value, previous_value, prefix = nil)
+      item = {:text => "", :value => value}
+      item.merge!({:prefix => prefix}) if prefix
+      self.push(:item => [item, {:text => "", :value => previous_value}])
     end
 
     # Items should be an array of hashes, each hash containing:

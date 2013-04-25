@@ -35,6 +35,11 @@ class PushTest < Test::Unit::TestCase
     assert_equal true, @push.number_and_secondary_value(100, 10)
   end
 
+  def test_number_and_secondary_value_and_prefix
+    expect_http_request({"api_key" => "12345", "data" => {"item" => [{"text" => "", "value" => 100, "prefix" => "$"}, {"text" => "", "value" => 10}]}}.to_json)
+    assert_equal true, @push.number_and_secondary_value(100, 10, '$')
+  end
+
   def test_text
     expect_http_request({"api_key" => "12345", "data" => {"item" => [{"text" => "Test1", "type" => 2}, {"text" => "Test2", "type" => 1}]}}.to_json)
     assert_equal true, @push.text([{:type => :info, :text => "Test1"}, {:type => :alert, :text => "Test2"}])
