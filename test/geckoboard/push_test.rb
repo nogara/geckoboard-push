@@ -46,8 +46,8 @@ class PushTest < Test::Unit::TestCase
   end
 
   def test_rag
-    expect_http_request({"api_key" => "12345", "data" => {"item" => [{"value" => 1}, {"value" => 2}, {"value" => 3}]}}.to_json)
-    assert_equal true, @push.rag(1,2,3)
+    expect_http_request({"api_key" => "12345","data" => {"item" => [{"value" => 1,"text" => "red"},{"value" => 2,"text" => "amber"},{"value" => 3,"text" => "green"}]}}.to_json)
+    assert_equal true, @push.rag('red', 1, 'amber', 2, 'green', 3)
   end
 
   def test_line
